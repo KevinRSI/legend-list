@@ -4,6 +4,7 @@ import { LegendList } from '@legendapp/list';
 import { useRef, useState } from 'react';
 import { LogBox, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { Item, renderItem } from '../renderItem';
+import EmptyList from '@/components/EmptyList';
 
 LogBox.ignoreLogs(['Open debugger']);
 
@@ -55,7 +56,7 @@ export default function HomeScreen() {
                 }}
                 ListHeaderComponent={<View />}
                 ListHeaderComponentStyle={styles.listHeader}
-
+                ListEmptyComponent={EmptyList}
                 // initialScrollOffset={20000}
                 // initialScrollIndex={500}
                 // inverted

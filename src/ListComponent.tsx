@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { $View } from './$View';
 import { Containers } from './Containers';
-import { peek$, set$, useStateContext } from './state';
+import { peek$, set$, use$, useStateContext } from './state';
 import type { LegendListProps } from './types';
 
 interface ListComponentProps
@@ -55,6 +55,7 @@ export const ListComponent = React.memo(function ListComponent({
     ListHeaderComponentStyle,
     ListFooterComponent,
     ListFooterComponentStyle,
+    ListEmptyComponent,
     getRenderedItem,
     updateItemSize,
     addTotalLength,
@@ -62,6 +63,7 @@ export const ListComponent = React.memo(function ListComponent({
     ...rest
 }: ListComponentProps) {
     const ctx = useStateContext();
+    const numItems = use$<number>('numItems');
 
     return (
         <ScrollView
@@ -119,6 +121,7 @@ export const ListComponent = React.memo(function ListComponent({
                 ItemSeparatorComponent={ItemSeparatorComponent && getComponent(ItemSeparatorComponent)}
                 updateItemSize={updateItemSize}
             />
+            {!!(numItems === 0 && ListEmptyComponent) && getComponent(ListEmptyComponent)}
             {ListFooterComponent && (
                 <View
                     style={ListFooterComponentStyle}
